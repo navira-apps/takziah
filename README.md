@@ -5,9 +5,10 @@ Aplikasi undangan mobile berbasis HTML, CSS, JavaScript, dan JSON. Tidak memerlu
 ## Fitur
 
 - Tampilan undangan yang responsif untuk ponsel
+- Transisi sampul dinamis dan animasi masuk saat halaman digulir
 - Personalisasi nama tamu melalui URL `?to=Nama Tamu`
 - Foto almarhum/almarhumah dan musik latar
-- Informasi tanggal, waktu, lokasi, peta, hitung mundur, dan simpan agenda
+- Informasi tanggal, waktu, lokasi, peta, dan hitung mundur
 - Admin untuk mengatur isi undangan
 - Daftar tamu lokal dengan nomor WhatsApp opsional
 - Generator pesan dan tautan WhatsApp per tamu

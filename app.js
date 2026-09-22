@@ -20,6 +20,7 @@
 
   let config = fallback;
   let timer;
+  let revealObserver;
   const guest = new URLSearchParams(location.search).get("to")?.trim() || "Bapak/Ibu/Saudara/i";
   $("guestName").textContent = guest;
 
@@ -100,34 +101,40 @@
     setTimeout(() => $("toast").classList.remove("show"), 2200);
   }
 
-  function downloadCalendar() {
-    const start = getEventDate();
-    const end = new Date(start.getTime() + 2 * 60 * 60 * 1000);
-    const stamp = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-    const clean = (s) => String(s || "").replace(/[\\,;]/g, " ").replace(/\n/g, " ");
-    const ics = [
-      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Undangan Takziah//ID",
-      "BEGIN:VEVENT", `DTSTART:${stamp(start)}`, `DTEND:${stamp(end)}`,
-      `SUMMARY:${clean(config.eventTitle)} - ${clean(config.deceasedName)}`,
-      `LOCATION:${clean(config.locationName)}, ${clean(config.address)}`,
-      `DESCRIPTION:${clean(config.opening)}`, "END:VEVENT", "END:VCALENDAR"
-    ].join("\r\n");
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
-    link.download = "agenda-tahlil-7-hari.ics";
-    link.click();
-    URL.revokeObjectURL(link.href);
+  function prepareScrollReveal() {
+    const items = document.querySelectorAll(".content-section .card, .content-section footer");
+    items.forEach(item => item.classList.add("reveal"));
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      items.forEach(item => item.classList.add("is-visible"));
+      return;
+    }
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: .14, rootMargin: "0px 0px -7% 0px" });
+    items.forEach(item => revealObserver.observe(item));
   }
 
   $("openInvitation").addEventListener("click", async () => {
+    $("openInvitation").disabled = true;
+    window.scrollTo(0, 0);
     $("invitation").classList.add("open");
     $("invitation").setAttribute("aria-hidden", "false");
-    $("gate").classList.add("closed");
-    document.body.style.overflow = "auto";
+    document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      $("invitation").classList.add("revealed");
+      $("gate").classList.add("opening");
+    }));
+    setTimeout(() => {
+      $("gate").classList.add("closed");
+      document.body.style.overflow = "auto";
+    }, 1050);
     await toggleMusic();
   });
   $("musicButton").addEventListener("click", toggleMusic);
-  $("calendarButton").addEventListener("click", downloadCalendar);
 
   fetch(`config.json?v=${Date.now()}`)
     .then((response) => {
@@ -136,5 +143,8 @@
     })
     .then((data) => { config = { ...fallback, ...data, theme: { ...fallback.theme, ...(data.theme || {}) } }; })
     .catch(() => showToast("Memakai data contoh. Periksa config.json."))
-    .finally(render);
+    .finally(() => {
+      render();
+      prepareScrollReveal();
+    });
 })();
