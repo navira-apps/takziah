@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#153f36">
+  <meta name="description" content="Undangan doa dan tahlil tujuh hari">
+  <title>Undangan Doa dan Tahlil 7 Hari</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="gate" id="gate">
+    <div class="gate-pattern"></div>
+    <div class="gate-content">
+      <div class="bismillah" aria-label="Bismillahirrahmanirrahim">﷽</div>
+      <p class="eyebrow">UNDANGAN DOA &amp; TAHLIL</p>
+      <h1 id="gateTitle">Tujuh Hari Berpulang</h1>
+      <p class="gate-name" id="gateName">Almarhum</p>
+      <div class="guest-card">
+        <span>Kepada Yth.</span>
+        <strong id="guestName">Bapak/Ibu/Saudara/i</strong>
+      </div>
+      <button class="button button-gold" id="openInvitation" type="button">Buka Undangan</button>
+      <small>Mohon maaf apabila ada kesalahan penulisan nama atau gelar.</small>
+    </div>
+  </div>
+
+  <main id="invitation" class="invitation" aria-hidden="true">
+    <section class="hero section">
+      <div class="ornament">✦</div>
+      <p class="eyebrow">INNALILLAHI WA INNA ILAIHI RAJI'UN</p>
+      <h1 id="eventTitle">Undangan Doa dan Tahlil 7 Hari</h1>
+      <div class="portrait-wrap">
+        <img id="deceasedPhoto" class="portrait" src="assets/placeholder-foto.svg" alt="Foto almarhum/almarhumah">
+      </div>
+      <p class="label">Mengenang dan mendoakan</p>
+      <h2 id="deceasedName">Almarhum Bapak Ahmad</h2>
+      <p id="prayer" class="prayer"></p>
+      <a href="#detail" class="scroll-hint">Lihat detail <span>↓</span></a>
+    </section>
+
+    <section class="section content-section" id="detail">
+      <div class="card intro-card">
+        <div class="bismillah small">﷽</div>
+        <p>Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
+        <p id="opening"></p>
+      </div>
+
+      <div class="card event-card">
+        <p class="eyebrow">INSYAALLAH DILAKSANAKAN PADA</p>
+        <div class="date-display">
+          <span id="eventDay">Kamis</span>
+          <strong id="eventDateNumber">01</strong>
+          <span id="eventMonthYear">Oktober 2026</span>
+        </div>
+        <div class="detail-row">
+          <div class="icon" aria-hidden="true">◷</div>
+          <div><span>Waktu</span><strong id="eventTime">19.30 WIB</strong></div>
+        </div>
+        <div class="detail-row">
+          <div class="icon" aria-hidden="true">⌖</div>
+          <div><span id="locationName">Kediaman Keluarga</span><strong id="address"></strong></div>
+        </div>
+        <div class="button-row">
+          <a class="button button-primary" id="mapsButton" target="_blank" rel="noopener">Buka Peta</a>
+          <button class="button button-outline" id="calendarButton" type="button">Simpan Agenda</button>
+        </div>
+      </div>
+
+      <div class="card countdown-card">
+        <p class="eyebrow">MENUJU WAKTU ACARA</p>
+        <div class="countdown" id="countdown">
+          <div><strong id="days">00</strong><span>Hari</span></div>
+          <div><strong id="hours">00</strong><span>Jam</span></div>
+          <div><strong id="minutes">00</strong><span>Menit</span></div>
+          <div><strong id="seconds">00</strong><span>Detik</span></div>
+        </div>
+      </div>
+
+      <div class="card closing-card">
+        <p id="closing"></p>
+        <p>Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
+        <span>Hormat kami,</span>
+        <h3 id="family"></h3>
+      </div>
+
+      <footer>
+        <p>Terima kasih atas doa dan perhatian yang diberikan.</p>
+      </footer>
+    </section>
+  </main>
+
+  <button class="music-button" id="musicButton" type="button" aria-label="Putar atau jeda musik" title="Musik latar">♫</button>
+  <audio id="backgroundMusic" loop preload="none"></audio>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

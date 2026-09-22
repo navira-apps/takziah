@@ -1,0 +1,21 @@
+{
+  "deceasedName": "Almarhum Bapak Ahmad",
+  "eventTitle": "Undangan Doa dan Tahlil 7 Hari",
+  "eventDate": "2026-10-01",
+  "eventTime": "19:30",
+  "timezone": "Asia/Jakarta",
+  "locationName": "Kediaman Keluarga",
+  "address": "Jl. Contoh No. 10, Kecamatan, Kabupaten",
+  "mapsUrl": "https://maps.google.com/",
+  "family": "Keluarga Besar Bapak Ahmad",
+  "photo": "assets/placeholder-foto.svg",
+  "music": "",
+  "opening": "Dengan memohon rahmat dan rida Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri doa dan tahlil tujuh hari wafatnya:",
+  "closing": "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan turut mendoakan. Atas kehadiran dan doanya, kami ucapkan terima kasih.",
+  "prayer": "Semoga Allah SWT mengampuni segala khilafnya, menerima amal ibadahnya, dan menempatkannya di tempat terbaik di sisi-Nya.",
+  "theme": {
+    "primary": "#153f36",
+    "secondary": "#c9a96a",
+    "background": "#f7f3e9"
+  }
+}

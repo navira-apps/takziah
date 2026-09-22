@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#153f36">
+  <title>Admin Undangan Takziah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header class="admin-header">
+    <div><span>ADMIN PANEL</span><h1>Undangan Takziah 7 Hari</h1></div>
+    <a href="index.html" target="_blank">Lihat Undangan ↗</a>
+  </header>
+
+  <main class="admin-layout">
+    <nav class="tabs" aria-label="Navigasi admin">
+      <button class="tab active" data-tab="content">Isi Undangan</button>
+      <button class="tab" data-tab="guests">Daftar Tamu <span id="guestCount">0</span></button>
+      <button class="tab" data-tab="publish">Publikasi</button>
+    </nav>
+
+    <section class="panel active" id="contentPanel">
+      <div class="section-heading"><div><span>01</span><h2>Informasi utama</h2></div><p>Data ini akan tampil pada halaman undangan.</p></div>
+      <form id="configForm">
+        <div class="form-grid">
+          <label class="full">Nama almarhum/almarhumah<input id="deceasedName" required></label>
+          <label class="full">Judul acara<input id="eventTitle" required></label>
+          <label>Tanggal pelaksanaan<input id="eventDate" type="date" required></label>
+          <label>Waktu<input id="eventTime" type="time" required></label>
+          <label>Zona waktu<select id="timezone"><option>Asia/Jakarta</option><option>Asia/Makassar</option><option>Asia/Jayapura</option></select></label>
+          <label>Nama lokasi<input id="locationName" required></label>
+          <label class="full">Alamat lengkap<textarea id="address" rows="3" required></textarea></label>
+          <label class="full">Tautan Google Maps<input id="mapsUrl" type="url" placeholder="https://maps.app.goo.gl/..."></label>
+          <label class="full">Nama keluarga<input id="family" required></label>
+          <label class="full">Kalimat pembuka<textarea id="opening" rows="4"></textarea></label>
+          <label class="full">Doa singkat<textarea id="prayer" rows="3"></textarea></label>
+          <label class="full">Kalimat penutup<textarea id="closing" rows="4"></textarea></label>
+        </div>
+
+        <div class="section-heading separated"><div><span>02</span><h2>Foto dan musik</h2></div><p>Unggah file, lalu unduh kembali untuk dimasukkan ke folder assets.</p></div>
+        <div class="upload-grid">
+          <div class="upload-card">
+            <label>Foto almarhum/almarhumah<input id="photoFile" type="file" accept="image/jpeg,image/png,image/webp"></label>
+            <input id="photoPath" value="assets/placeholder-foto.svg" aria-label="Lokasi file foto">
+            <div class="preview portrait-preview"><img id="photoPreview" alt="Pratinjau foto"></div>
+            <button class="link-button" id="downloadPhoto" type="button" disabled>Unduh file foto</button>
+          </div>
+          <div class="upload-card">
+            <label>Musik latar<input id="musicFile" type="file" accept="audio/mpeg,audio/mp3,audio/wav,audio/ogg"></label>
+            <input id="musicPath" placeholder="assets/musik-latar.mp3" aria-label="Lokasi file musik">
+            <audio id="musicPreview" controls></audio>
+            <button class="link-button" id="downloadMusic" type="button" disabled>Unduh file musik</button>
+          </div>
+        </div>
+
+        <div class="section-heading separated"><div><span>03</span><h2>Warna tampilan</h2></div><p>Gunakan kombinasi dengan kontras yang cukup.</p></div>
+        <div class="color-grid">
+          <label>Warna utama<input id="primaryColor" type="color"></label>
+          <label>Aksen emas<input id="secondaryColor" type="color"></label>
+          <label>Latar belakang<input id="backgroundColor" type="color"></label>
+        </div>
+        <div class="sticky-actions">
+          <span id="saveStatus">Perubahan belum disimpan</span>
+          <button class="button primary" type="submit">Simpan di Perangkat</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel" id="guestsPanel">
+      <div class="section-heading"><div><span>01</span><h2>Masukkan daftar tamu</h2></div><p>Satu tamu per baris. Nomor WhatsApp bersifat opsional.</p></div>
+      <div class="helper-box"><strong>Format:</strong><code>Nama Tamu</code> atau <code>Nama Tamu|628123456789</code></div>
+      <textarea id="guestInput" rows="8" placeholder="Bapak Abdullah|628123456789&#10;Ibu Aminah&#10;Keluarga Bapak Hasan"></textarea>
+      <div class="inline-actions">
+        <button class="button primary" id="addGuests" type="button">Tambahkan Tamu</button>
+        <button class="button secondary" id="clearGuests" type="button">Hapus Semua</button>
+      </div>
+
+      <div class="message-editor">
+        <h3>Template pesan WhatsApp</h3>
+        <p>Variabel tersedia: <code>{nama}</code>, <code>{acara}</code>, <code>{almarhum}</code>, <code>{tanggal}</code>, <code>{waktu}</code>, <code>{lokasi}</code>, <code>{alamat}</code>, dan <code>{link}</code>.</p>
+        <textarea id="messageTemplate" rows="10"></textarea>
+        <label>URL undangan GitHub Pages<input id="siteUrl" type="url" placeholder="https://username.github.io/nama-repo/"></label>
+        <button class="button secondary" id="saveMessage" type="button">Simpan Template</button>
+      </div>
+
+      <div class="guest-toolbar">
+        <h3>Daftar undangan</h3>
+        <input id="guestSearch" type="search" placeholder="Cari nama tamu...">
+      </div>
+      <div id="guestList" class="guest-list"></div>
+      <div class="inline-actions">
+        <button class="button secondary" id="copyAllMessages" type="button">Salin Semua Pesan</button>
+        <button class="button secondary" id="exportGuests" type="button">Ekspor CSV</button>
+      </div>
+    </section>
+
+    <section class="panel" id="publishPanel">
+      <div class="section-heading"><div><span>01</span><h2>Siapkan file publikasi</h2></div><p>Unduh konfigurasi terbaru untuk mengganti file di GitHub.</p></div>
+      <div class="publish-card">
+        <h3>1. Unduh konfigurasi</h3>
+        <p>File berisi data acara, tetapi tidak memuat daftar tamu.</p>
+        <button class="button primary" id="exportConfig" type="button">Unduh config.json</button>
+      </div>
+      <div class="publish-card">
+        <h3>2. Lengkapi folder assets</h3>
+        <p>Pastikan foto dan musik memakai nama yang sama dengan isian lokasi file pada tab Isi Undangan.</p>
+      </div>
+      <div class="publish-card">
+        <h3>3. Unggah ke GitHub</h3>
+        <p>Ganti <code>config.json</code>, unggah file media ke <code>assets</code>, lalu tunggu GitHub Pages memperbarui situs.</p>
+      </div>
+      <div class="warning"><strong>Catatan keamanan</strong><p>Halaman admin pada situs statis tidak memiliki login server. Data tersimpan hanya di browser ini. Jangan menyimpan data sensitif atau token GitHub di halaman admin.</p></div>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="admin.js"></script>
+</body>
+</html>
