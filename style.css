@@ -207,6 +207,10 @@ h1, h2, h3 { font-family: "Playfair Display", Georgia, serif; line-height: 1.18;
 .reveal:nth-of-type(2) { transition-delay: .06s; }
 .intro-card, .closing-card { text-align: center; }
 .intro-card p { margin: 12px 0; }
+.intro-deceased { margin-top: 24px; padding: 21px 16px; border-top: 1px solid #e4dccb; border-bottom: 1px solid #e4dccb; }
+.intro-deceased span { color: var(--muted); font-size: 12px; }
+.intro-deceased h3 { margin: 5px 0 0; color: var(--primary); font-size: 25px; }
+.intro-deceased p { margin: 3px 0 0; color: var(--gold); font-family: "Playfair Display", serif; font-size: 17px; font-style: italic; }
 .event-card .eyebrow, .countdown-card .eyebrow { color: var(--primary); text-align: center; }
 .date-display { display: grid; justify-items: center; margin: 19px 0 26px; }
 .date-display span { font-size: 15px; font-weight: 600; }
