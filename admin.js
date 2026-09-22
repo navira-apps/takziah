@@ -8,7 +8,7 @@
   let guests = JSON.parse(localStorage.getItem(GUEST_KEY) || "[]");
   let mediaFiles = { photo: null, music: null };
 
-  const fields = ["deceasedName","eventTitle","eventDate","eventTime","timezone","locationName","address","mapsUrl","family","opening","prayer","closing"];
+  const fields = ["deceasedName","nickname","eventTitle","eventDate","eventTime","timezone","locationName","address","mapsUrl","family","opening","prayer","closing"];
   const showToast = (message) => {
     $("toast").textContent = message;
     $("toast").classList.add("show");

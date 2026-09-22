@@ -38,6 +38,7 @@
       </div>
       <p class="label">Mengenang dan mendoakan</p>
       <h2 id="deceasedName">Almarhum Bapak Ahmad</h2>
+      <p class="deceased-nickname" id="nickname"></p>
       <p id="prayer" class="prayer"></p>
       <a href="#detail" class="scroll-hint">Lihat detail <span>↓</span></a>
     </section>
@@ -93,7 +94,7 @@
   </main>
 
   <button class="music-button" id="musicButton" type="button" aria-label="Putar atau jeda musik" title="Musik latar">♫</button>
-  <audio id="backgroundMusic" loop preload="none"></audio>
+  <audio id="backgroundMusic" loop preload="auto" playsinline></audio>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="app.js"></script>
 </body>

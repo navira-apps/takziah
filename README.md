@@ -49,6 +49,8 @@ Data admin dan daftar tamu tersimpan di `localStorage` browser yang sedang dipak
 6. Tunggu sampai URL GitHub Pages aktif, contohnya `https://username.github.io/nama-repo/`.
 7. Masukkan URL tersebut pada kolom **URL undangan GitHub Pages** di halaman admin.
 
+Musik latar yang digunakan oleh konfigurasi bawaan harus bernama `musik-latar.mp3` dan diletakkan di dalam folder `assets`. Musik dimulai setelah pengunjung menekan tombol **Buka Undangan**, sesuai pembatasan pemutaran audio pada browser ponsel.
+
 ## Format daftar tamu
 
 Satu tamu per baris:

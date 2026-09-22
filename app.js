@@ -2,6 +2,7 @@
   const $ = (id) => document.getElementById(id);
   const fallback = {
     deceasedName: "Almarhum/Almarhumah",
+    nickname: "",
     eventTitle: "Undangan Doa dan Tahlil 7 Hari",
     eventDate: "2026-10-01",
     eventTime: "19:30",
@@ -11,7 +12,7 @@
     mapsUrl: "https://maps.google.com/",
     family: "Keluarga Besar",
     photo: "assets/placeholder-foto.svg",
-    music: "",
+    music: "assets/musik-latar.mp3",
     opening: "Dengan memohon rahmat dan rida Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri doa dan tahlil tujuh hari.",
     closing: "Atas kehadiran dan doanya, kami ucapkan terima kasih.",
     prayer: "Semoga Allah SWT mengampuni segala khilafnya dan menerima amal ibadahnya.",
@@ -44,6 +45,8 @@
     $("gateName").textContent = config.deceasedName;
     $("eventTitle").textContent = config.eventTitle;
     $("deceasedName").textContent = config.deceasedName;
+    $("nickname").textContent = config.nickname ? `“${config.nickname}”` : "";
+    $("nickname").hidden = !config.nickname;
     $("deceasedPhoto").src = config.photo || fallback.photo;
     $("deceasedPhoto").onerror = () => { $("deceasedPhoto").style.visibility = "hidden"; };
     $("opening").textContent = config.opening;
@@ -64,6 +67,8 @@
     }
     if (config.music) {
       $("backgroundMusic").src = config.music;
+      $("backgroundMusic").volume = .55;
+      $("backgroundMusic").load();
       $("musicButton").classList.add("show");
     }
     updateCountdown();
@@ -87,7 +92,11 @@
     const audio = $("backgroundMusic");
     if (!audio.src) return;
     if (audio.paused) {
-      try { await audio.play(); $("musicButton").classList.add("playing"); }
+      try {
+        audio.muted = false;
+        await audio.play();
+        $("musicButton").classList.add("playing");
+      }
       catch { showToast("Ketuk tombol musik untuk memutar audio"); }
     } else {
       audio.pause();
@@ -120,6 +129,7 @@
 
   $("openInvitation").addEventListener("click", async () => {
     $("openInvitation").disabled = true;
+    const musicPromise = toggleMusic();
     window.scrollTo(0, 0);
     $("invitation").classList.add("open");
     $("invitation").setAttribute("aria-hidden", "false");
@@ -132,7 +142,7 @@
       $("gate").classList.add("closed");
       document.body.style.overflow = "auto";
     }, 1050);
-    await toggleMusic();
+    await musicPromise;
   });
   $("musicButton").addEventListener("click", toggleMusic);
 
