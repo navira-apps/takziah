@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-labelledby="title desc">
+  <title id="title">Placeholder foto</title>
+  <desc id="desc">Silakan ganti dengan foto almarhum atau almarhumah melalui halaman admin.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#e8e0cf"/>
+      <stop offset="1" stop-color="#cfc2a8"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <circle cx="200" cy="155" r="70" fill="#f8f4ea" opacity=".82"/>
+  <path d="M83 370c8-92 51-139 117-139s109 47 117 139" fill="#f8f4ea" opacity=".82"/>
+  <text x="200" y="340" text-anchor="middle" fill="#6f675a" font-family="Arial, sans-serif" font-size="17">GANTI FOTO DI ADMIN</text>
+</svg>
