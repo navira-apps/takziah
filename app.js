@@ -3,7 +3,7 @@
   const fallback = {
     deceasedName: "Almarhum/Almarhumah",
     nickname: "",
-    eventTitle: "Undangan Doa dan Tahlil 7 Hari",
+    eventTitle: "Undangan Doa Arwah Hari Ke-7",
     eventDate: "2026-10-01",
     eventTime: "19:30",
     timezone: "Asia/Jakarta",
@@ -51,6 +51,9 @@
     $("deceasedName").textContent = config.deceasedName;
     $("nickname").textContent = config.nickname ? `“${config.nickname}”` : "";
     $("nickname").hidden = !config.nickname;
+    $("introDeceasedName").textContent = config.deceasedName;
+    $("introNickname").textContent = config.nickname ? `“${config.nickname}”` : "";
+    $("introNickname").hidden = !config.nickname;
     $("deceasedPhoto").src = config.photo || fallback.photo;
     $("deceasedPhoto").onerror = () => { $("deceasedPhoto").style.visibility = "hidden"; };
     $("opening").textContent = config.opening;
