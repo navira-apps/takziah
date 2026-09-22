@@ -22,6 +22,10 @@
   let config = fallback;
   let timer;
   let revealObserver;
+  let gateTimer;
+  let invitationIsOpen = false;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const transitionDuration = reducedMotion ? 30 : 1050;
   const guest = new URLSearchParams(location.search).get("to")?.trim() || "Bapak/Ibu/Saudara/i";
   $("guestName").textContent = guest;
 
@@ -127,10 +131,37 @@
     items.forEach(item => revealObserver.observe(item));
   }
 
+  function closeInvitation() {
+    if (!invitationIsOpen) return;
+    invitationIsOpen = false;
+    clearTimeout(gateTimer);
+    document.body.style.overflow = "hidden";
+    $("gate").classList.remove("closed");
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      $("gate").classList.remove("opening");
+      $("invitation").classList.remove("revealed");
+    }));
+
+    const audio = $("backgroundMusic");
+    audio.pause();
+    $("musicButton").classList.remove("playing");
+
+    gateTimer = setTimeout(() => {
+      $("invitation").classList.remove("open");
+      $("invitation").setAttribute("aria-hidden", "true");
+      $("openInvitation").disabled = false;
+      document.body.style.overflow = "auto";
+      window.scrollTo(0, 0);
+    }, transitionDuration);
+  }
+
   $("openInvitation").addEventListener("click", async () => {
+    if (invitationIsOpen) return;
+    invitationIsOpen = true;
     $("openInvitation").disabled = true;
     const musicPromise = toggleMusic();
     window.scrollTo(0, 0);
+    history.pushState({ ...(history.state || {}), invitationOpen: true }, "", location.href);
     $("invitation").classList.add("open");
     $("invitation").setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
@@ -138,13 +169,19 @@
       $("invitation").classList.add("revealed");
       $("gate").classList.add("opening");
     }));
-    setTimeout(() => {
+    clearTimeout(gateTimer);
+    gateTimer = setTimeout(() => {
       $("gate").classList.add("closed");
       document.body.style.overflow = "auto";
-    }, 1050);
+    }, transitionDuration);
     await musicPromise;
   });
   $("musicButton").addEventListener("click", toggleMusic);
+  window.addEventListener("popstate", () => closeInvitation());
+
+  if (history.state?.invitationOpen) {
+    history.replaceState({ ...history.state, invitationOpen: false }, "", location.href);
+  }
 
   fetch(`config.json?v=${Date.now()}`)
     .then((response) => {
