@@ -78,6 +78,7 @@ GitHub Pages adalah hosting statis. `admin.html` bukan panel admin dengan autent
 ├── config.json
 └── assets/
     ├── placeholder-foto.svg
+    ├── foto-rahman-saleh.png
     ├── foto-almarhum.jpg
     └── musik-latar.mp3
 ```
